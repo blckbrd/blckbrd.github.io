@@ -171,7 +171,7 @@
 
 <p>IP adress: 10.10.10.29</p>
 
-<h2 id="nmap"><em>NMAP</em></h2>
+<h2 id="nmap-scan"><strong>NMAP Scan</strong></h2>
 
 <p>With the NMAP scan I’ve found de following open ports.</p>
 
@@ -189,23 +189,23 @@
 | http-title: HTB Bank - Login
 |_Requested resource was login.php</code></pre></figure>
 
-<h1 id="test"><em>Test</em></h1>
+<h1 id="test"><strong>Test</strong></h1>
 
-<h2 id="test-1"><em>Test</em></h2>
+<h2 id="test-1"><strong>Test</strong></h2>
 
-<h3 id="test-2"><em>Test</em></h3>
+<h3 id="test-2"><strong>Test</strong></h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>22/tcp open  ssh     OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">**</span>22/tcp<span class="k">**</span> open  ssh     OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 <span class="o">(</span>Ubuntu Linux<span class="p">;</span> protocol 2.0<span class="o">)</span>
 | ssh-hostkey:
-|   1024 08:ee:d0:30:d5:45:e4:59:db:4d:54:a8:dc:5c:ef:15 (DSA)
-|   2048 b8:e0:15:48:2d:0d:f0:f1:73:33:b7:81:64:08:4a:91 (RSA)
-|   256 a0:4c:94:d1:7b:6e:a8:fd:07:fe:11:eb:88:d5:16:65 (ECDSA)
-|_  256 2d:79:44:30:c8:bb:5e:8f:07:cf:5b:72:ef:a1:6d:67 (ED25519)
-53/tcp open  domain  ISC BIND 9.9.5-3ubuntu0.14 (Ubuntu Linux)
+|   1024 08:ee:d0:30:d5:45:e4:59:db:4d:54:a8:dc:5c:ef:15 <span class="o">(</span>DSA<span class="o">)</span>
+|   2048 b8:e0:15:48:2d:0d:f0:f1:73:33:b7:81:64:08:4a:91 <span class="o">(</span>RSA<span class="o">)</span>
+|   256 a0:4c:94:d1:7b:6e:a8:fd:07:fe:11:eb:88:d5:16:65 <span class="o">(</span>ECDSA<span class="o">)</span>
+|_  256 2d:79:44:30:c8:bb:5e:8f:07:cf:5b:72:ef:a1:6d:67 <span class="o">(</span>ED25519<span class="o">)</span>
+<span class="k">**</span>53/tcp<span class="k">**</span> open  domain  ISC BIND 9.9.5-3ubuntu0.14 <span class="o">(</span>Ubuntu Linux<span class="o">)</span>
 | dns-nsid:
 |_  bind.version: 9.9.5-3ubuntu0.14-Ubuntu
-80/tcp open  http    Apache httpd 2.4.7 ((Ubuntu))
-|_http-server-header: Apache/2.4.7 (Ubuntu)
+<span class="k">**</span>80/tcp<span class="k">**</span> open  http    Apache httpd 2.4.7 <span class="o">((</span>Ubuntu<span class="o">))</span>
+|_http-server-header: Apache/2.4.7 <span class="o">(</span>Ubuntu<span class="o">)</span>
 | http-title: HTB Bank - Login
 |_Requested resource was login.php
 </code></pre></div></div>
