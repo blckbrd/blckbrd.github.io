@@ -131,7 +131,52 @@ Machine name: Bank</p>
 
 <p>With the NMAP scan I’ve found de following open ports.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">22/tcp open  ssh     OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 <span class="o">(</span>Ubuntu Linux<span class="p">;</span> protocol 2.0<span class="o">)</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">nmap <span class="nt">-T4</span> <span class="nt">-A</span> <span class="nt">-v</span> <span class="nt">-p-</span> 10.10.10.29
+
+Starting Nmap 7.80 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2019-12-20 15:45 EST
+NSE: Loaded 151 scripts <span class="k">for </span>scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 15:45
+Completed NSE at 15:45, 0.00s elapsed
+Initiating NSE at 15:45
+Completed NSE at 15:45, 0.00s elapsed
+Initiating NSE at 15:45
+Completed NSE at 15:45, 0.00s elapsed
+Initiating Ping Scan at 15:45
+Scanning 10.10.10.29 <span class="o">[</span>4 ports]
+Completed Ping Scan at 15:45, 0.07s elapsed <span class="o">(</span>1 total hosts<span class="o">)</span>
+Initiating Parallel DNS resolution of 1 host. at 15:45
+Completed Parallel DNS resolution of 1 host. at 15:45, 1.01s elapsed
+Initiating SYN Stealth Scan at 15:45
+Scanning 10.10.10.29 <span class="o">[</span>65535 ports]
+Discovered open port 22/tcp on 10.10.10.29
+Discovered open port 53/tcp on 10.10.10.29
+Discovered open port 80/tcp on 10.10.10.29
+Completed SYN Stealth Scan at 15:45, 14.48s elapsed <span class="o">(</span>65535 total ports<span class="o">)</span>
+Initiating Service scan at 15:45
+Scanning 3 services on 10.10.10.29
+Completed Service scan at 15:46, 6.08s elapsed <span class="o">(</span>3 services on 1 host<span class="o">)</span>
+Initiating OS detection <span class="o">(</span>try <span class="c">#1) against 10.10.10.29</span>
+Retrying OS detection <span class="o">(</span>try <span class="c">#2) against 10.10.10.29</span>
+Retrying OS detection <span class="o">(</span>try <span class="c">#3) against 10.10.10.29</span>
+Retrying OS detection <span class="o">(</span>try <span class="c">#4) against 10.10.10.29</span>
+Retrying OS detection <span class="o">(</span>try <span class="c">#5) against 10.10.10.29</span>
+Initiating Traceroute at 15:46
+Completed Traceroute at 15:46, 0.02s elapsed
+Initiating Parallel DNS resolution of 2 hosts. at 15:46
+Completed Parallel DNS resolution of 2 hosts. at 15:46, 1.01s elapsed
+NSE: Script scanning 10.10.10.29.
+Initiating NSE at 15:46
+Completed NSE at 15:46, 8.20s elapsed
+Initiating NSE at 15:46
+Completed NSE at 15:46, 0.10s elapsed
+Initiating NSE at 15:46
+Completed NSE at 15:46, 0.01s elapsed
+Nmap scan report <span class="k">for </span>10.10.10.29
+Host is up <span class="o">(</span>0.024s latency<span class="o">)</span><span class="nb">.</span>
+Not shown: 65532 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 <span class="o">(</span>Ubuntu Linux<span class="p">;</span> protocol 2.0<span class="o">)</span>
 | ssh-hostkey: 
 |   1024 08:ee:d0:30:d5:45:e4:59:db:4d:54:a8:dc:5c:ef:15 <span class="o">(</span>DSA<span class="o">)</span>
 |   2048 b8:e0:15:48:2d:0d:f0:f1:73:33:b7:81:64:08:4a:91 <span class="o">(</span>RSA<span class="o">)</span>
@@ -141,9 +186,10 @@ Machine name: Bank</p>
 | dns-nsid: 
 |_  bind.version: 9.9.5-3ubuntu0.14-Ubuntu
 80/tcp open  http    Apache httpd 2.4.7 <span class="o">((</span>Ubuntu<span class="o">))</span>
+| http-methods: 
+|_  Supported Methods: OPTIONS GET HEAD POST
 |_http-server-header: Apache/2.4.7 <span class="o">(</span>Ubuntu<span class="o">)</span>
-| http-title: HTB Bank - Login
-|_Requested resource was login.php</code></pre></figure>
+|_http-title: Apache2 Ubuntu Default Page: It works</code></pre></figure>
 
 
     </div>
