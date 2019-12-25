@@ -43,3 +43,6 @@
 .icon-patreon:before {
   content: "\e905";
 }
+.icon-email:before {
+  content: "\e906";
+}
