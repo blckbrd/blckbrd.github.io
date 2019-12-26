@@ -194,7 +194,7 @@ PORT   STATE SERVICE VERSION
 
 <p>When we visit 10.10.10.29 in Firefox we get the default Apache webserver page.</p>
 
-<p><img src="/assets/img/apache.png" alt="Apache default page" target="_blank" /></p>
+<p><img src="/assets/img/apache.png" alt="Apache default page" /></p>
 
 <p>So with some guessing we’re going to use the domain name bank.htb and bind it to 10.10.10.9 in the hosts file.</p>
 
@@ -204,8 +204,7 @@ PORT   STATE SERVICE VERSION
 
 <p>Now when we visit bank.htb we get a login page. At first glance default user and passwords won’t work and nothing useful in de page source  so we have to dig a little deeper.</p>
 
-<p>![bank.htb login page]
-(https://blckbrdsec.com/assets/img/banklogin.png)</p>
+<p><img src="/assets/img/banklogin.png" alt="bank.htb login page" /></p>
 
 <p>Lets run <a href="https://github.com/maurosoria/dirsearch" target="_blank">dirsearch</a> to see if we can find more directories. 
 I used dirbusters medium wordlist for this search.</p>
@@ -236,13 +235,11 @@ Task Completed                                   </code></pre></figure>
 
 <p>http://bank.htb/balance-transfer show a number of records with encrypted credentials.</p>
 
-<p>![balance-transfer]
-(https://blckbrdsec.com/assets/img/balance.png)</p>
+<p><img src="https://blckbrdsec.com/assets/img/balance.png" alt="balance-transfer" /></p>
 
 <p>Among all the records we see a significant smaller file compared to the rest.</p>
 
-<p>![balance-transfer]
-(https://blckbrdsec.com/assets/img/smallfile.png)</p>
+<p><img src="https://blckbrdsec.com/assets/img/smallfile.png" alt="balance-transfer" /></p>
 
 <p>Opening 68576f20e9732f1b2edc4df5b8533230.acc we see –ERR ENCRYPT FAILED and usable credentials.</p>
 
