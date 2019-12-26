@@ -123,7 +123,7 @@
     <div class="post__content" data-aos="fade-up" data-aos-easing="ease-out-quad" data-aos-delay="100" data-aos-duration="700">
       <p>Write-up for retired machine “Bank” on <a href="https://hackthebox.eu" target="_blank">hackthebox.eu</a>. Its a machine running Linux with IP adress: <strong>10.10.10.29</strong>. Lets start by running a NMAP scan and see what ports are open.</p>
 
-<h1 id="nmap-scan"><strong>NMAP Scan</strong></h1>
+<h2 id="nmap-scan"><strong>NMAP Scan</strong></h2>
 
 <p><a href="https://www.explainshell.com/explain?cmd=nmap+-T4+-A+-p-+-v+10.10.10.29" target="_blank">nmap -T4 -A -p- -v 10.10.10.29</a></p>
 
@@ -205,6 +205,8 @@ PORT   STATE SERVICE VERSION
 <p>Now when we visit bank.htb we get a login page. At first glance default user and passwords won’t work and nothing useful in de page source  so we have to dig a little deeper.</p>
 
 <p><img src="/assets/img/banklogin.png" alt="bank.htb login page" /></p>
+
+<h2 id="dirsearch"><strong>Dirsearch</strong></h2>
 
 <p>Lets run <a href="https://github.com/maurosoria/dirsearch" target="_blank">dirsearch</a> to see if we can find more directories. 
 I used dirbusters medium wordlist for this search.</p>
