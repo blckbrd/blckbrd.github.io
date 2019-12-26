@@ -19,7 +19,7 @@
   <title>Hack The Box - Bank</title>
   <meta name='description' content='Cyber Security, HackTheBox, Docker, Vmware ESXI and more.'>
 
-  <link rel="canonical" href="https://blckbrdsec.com/2019/12/25/HTB-Bank/">
+  <link rel="canonical" href="https://blckbrdsec.com/2019/12/25/HTB-Bank.md/">
   <link rel="alternate" type="application/rss+xml" title="Blckbrd Sec – Personal Blog" href="/feed.xml">
 
   <!-- Fonts -->
@@ -121,11 +121,11 @@
     </div>
 
     <div class="post__content" data-aos="fade-up" data-aos-easing="ease-out-quad" data-aos-delay="100" data-aos-duration="700">
-      <p>Write-up for retired machine “Bank” on <a href="https://hackthebox.eu" target="_blank">hackthebox.eu</a>. Its a machine running Linux with IP adress: <strong>10.10.10.29</strong>. Lets start by running a NMAP scan and see what ports are open.</p>
+      Write-up for retired machine "Bank" on [hackthebox.eu](https://hackthebox.eu){:target="_blank"}. Its a machine running Linux with IP adress: **10.10.10.29**. Lets start by running a NMAP scan and see what ports are open.
 
-<h2 id="nmap-scan"><strong>NMAP Scan</strong></h2>
+## **NMAP Scan**
 
-<p><a href="https://www.explainshell.com/explain?cmd=nmap+-T4+-A+-p-+-v+10.10.10.29" target="_blank">nmap -T4 -A -p- -v 10.10.10.29</a></p>
+[nmap -T4 -A -p- -v 10.10.10.29](https://www.explainshell.com/explain?cmd=nmap+-T4+-A+-p-+-v+10.10.10.29){:target="_blank"}
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">Starting Nmap 7.80 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2019-12-20 15:45 EST
 NSE: Loaded 151 scripts <span class="k">for </span>scanning.
@@ -185,31 +185,29 @@ PORT   STATE SERVICE VERSION
 |_http-server-header: Apache/2.4.7 <span class="o">(</span>Ubuntu<span class="o">)</span>
 |_http-title: Apache2 Ubuntu Default Page: It works</code></pre></figure>
 
-<p>With the NMAP scan we found de following open ports.</p>
-<ul>
-  <li>22 SSH</li>
-  <li>53 DNS</li>
-  <li>80 Apache webserver</li>
-</ul>
+With the NMAP scan we found de following open ports.
+* 22 SSH
+* 53 DNS
+* 80 Apache webserver
 
-<p>When we visit 10.10.10.29 in Firefox we get the default Apache webserver page.</p>
+When we visit 10.10.10.29 in Firefox we get the default Apache webserver page.
 
-<p><img src="/assets/img/apache.png" alt="Apache default page" /></p>
+![Apache default page](/assets/img/apache.png)
 
-<p>So with some guessing we’re going to use the domain name bank.htb and bind it to 10.10.10.9 in the hosts file.</p>
+So with some guessing we're going to use the domain name bank.htb and bind it to 10.10.10.9 in the hosts file.
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">127.0.0.1       localhost
 127.0.1.1       kali
 10.10.10.29     bank.htb</code></pre></figure>
 
-<p>Now when we visit bank.htb we get a login page. At first glance default user and passwords won’t work and nothing useful in de page source  so we have to dig a little deeper.</p>
+Now when we visit bank.htb we get a login page. At first glance default user and passwords won't work and nothing useful in de page source so we have to dig a little deeper.
+ 
+![bank.htb login page](/assets/img/banklogin.png)
 
-<p><img src="/assets/img/banklogin.png" alt="bank.htb login page" /></p>
+## **Dirsearch**
 
-<h2 id="dirsearch"><strong>Dirsearch</strong></h2>
-
-<p>Lets run <a href="https://github.com/maurosoria/dirsearch" target="_blank">dirsearch</a> to see if we can find more directories. 
-I used dirbusters medium wordlist for this search.</p>
+Lets run [dirsearch](https://github.com/maurosoria/dirsearch){:target="_blank"} to see if we can find more directories. 
+I used dirbusters medium wordlist for this search.
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">python3 ./dirsearch.py <span class="nt">-w</span> /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt  <span class="nt">-f</span> <span class="nt">-e</span> php <span class="nt">-u</span> http://bank.htb <span class="nt">-t</span> 20
 
@@ -235,15 +233,15 @@ Target: http://bank.htb
                                                                                                                                                
 Task Completed                                   </code></pre></figure>
 
-<p>http://bank.htb/balance-transfer show a number of records with encrypted credentials.</p>
+http://bank.htb/balance-transfer shows a number of records with encrypted credentials.
 
-<p><img src="https://blckbrdsec.com/assets/img/balance.png" alt="balance-transfer" /></p>
+![balance-transfer](https://blckbrdsec.com/assets/img/balance.png)
 
-<p>Among all the records we see a significant smaller file compared to the rest.</p>
+Among all the records we see a significant smaller file compared to the rest.
 
-<p><img src="https://blckbrdsec.com/assets/img/smallfile.png" alt="balance-transfer" /></p>
+![balance-transfer](https://blckbrdsec.com/assets/img/smallfile.png)
 
-<p>Opening 68576f20e9732f1b2edc4df5b8533230.acc we see –ERR ENCRYPT FAILED and usable credentials.</p>
+Opening 68576f20e9732f1b2edc4df5b8533230.acc we see --ERR ENCRYPT FAILED and usable credentials.
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nt">--ERR</span> ENCRYPT FAILED
 +<span class="o">=================</span>+
@@ -273,21 +271,21 @@ Balance: 8842803 <span class="nb">.</span>
     <div class="post__share">
       <ul class="share__list list-reset">
         <li class="share__item">
-          <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://blckbrdsec.com/2019/12/25/HTB-Bank/"
+          <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://blckbrdsec.com/2019/12/25/HTB-Bank.md/"
             onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="nofollow">
               <svg enable-background="new 0 0 56.693 56.693" height="56.693" viewBox="0 0 56.693 56.693" width="56.693" xmlns="http://www.w3.org/2000/svg"><path d="m40.43 21.739h-7.645v-5.014c0-1.883 1.248-2.322 2.127-2.322h5.395v-8.278l-7.43-.029c-8.248 0-10.125 6.174-10.125 10.125v5.518h-4.77v8.53h4.77v24.137h10.033s0-13.32 0-24.137h6.77z"/></svg>
             </a>
         </li>
 
         <li class="share__item">
-          <a class="share__link share__twitter" href="https://twitter.com/intent/tweet?text=Hack%20The%20Box%20-%20Bank&url=https://blckbrdsec.com/2019/12/25/HTB-Bank/"
+          <a class="share__link share__twitter" href="https://twitter.com/intent/tweet?text=Hack%20The%20Box%20-%20Bank&url=https://blckbrdsec.com/2019/12/25/HTB-Bank.md/"
             onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="nofollow">
               <svg enable-background="new 0 0 56.693 56.693" height="56.693" viewBox="0 0 56.693 56.693" width="56.693" xmlns="http://www.w3.org/2000/svg"><path d="m52.837 15.065c-1.811.805-3.76 1.348-5.805 1.591 2.088-1.25 3.689-3.23 4.444-5.592-1.953 1.159-4.115 2-6.418 2.454-1.843-1.964-4.47-3.192-7.377-3.192-5.581 0-10.106 4.525-10.106 10.107 0 .791.089 1.562.262 2.303-8.4-.422-15.848-4.445-20.833-10.56-.87 1.492-1.368 3.228-1.368 5.082 0 3.506 1.784 6.6 4.496 8.412-1.656-.053-3.215-.508-4.578-1.265-.001.042-.001.085-.001.128 0 4.896 3.484 8.98 8.108 9.91-.848.23-1.741.354-2.663.354-.652 0-1.285-.063-1.902-.182 1.287 4.015 5.019 6.938 9.441 7.019-3.459 2.711-7.816 4.327-12.552 4.327-.815 0-1.62-.048-2.411-.142 4.474 2.869 9.786 4.541 15.493 4.541 18.591 0 28.756-15.4 28.756-28.756 0-.438-.009-.875-.028-1.309 1.974-1.422 3.688-3.203 5.042-5.23z"/></svg>
             </a>
         </li>
 
         <li class="share__item">
-          <a class="share__link share__pinterest" href="http://pinterest.com/pin/create/button/?url=https://blckbrdsec.com/2019/12/25/HTB-Bank/&amp;media=https://blckbrdsec.com/assets/img/bank.png&amp;description=Hack%20The%20Box%20-%20Bank"
+          <a class="share__link share__pinterest" href="http://pinterest.com/pin/create/button/?url=https://blckbrdsec.com/2019/12/25/HTB-Bank.md/&amp;media=https://blckbrdsec.com/assets/img/bank.png&amp;description=Hack%20The%20Box%20-%20Bank"
             onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pinterest" rel="nofollow">
               <svg enable-background="new 0 0 56.693 56.693" height="56.693" viewBox="0 0 56.693 56.693" width="56.693" xmlns="http://www.w3.org/2000/svg"><path d="m28.348 5.158c-13.599 0-24.625 11.023-24.625 24.625 0 10.082 6.063 18.744 14.739 22.553-.069-1.721-.012-3.783.429-5.654.473-2 3.168-13.418 3.168-13.418s-.787-1.572-.787-3.896c0-3.648 2.115-6.373 4.749-6.373 2.24 0 3.322 1.682 3.322 3.695 0 2.252-1.437 5.619-2.175 8.738-.616 2.613 1.31 4.744 3.887 4.744 4.665 0 7.808-5.992 7.808-13.092 0-5.397-3.635-9.437-10.246-9.437-7.47 0-12.123 5.57-12.123 11.792 0 2.146.633 3.658 1.624 4.83.455.537.519.754.354 1.371-.118.453-.389 1.545-.501 1.977-.164.625-.669.848-1.233.617-3.44-1.404-5.043-5.172-5.043-9.408 0-6.994 5.899-15.382 17.599-15.382 9.4 0 15.588 6.804 15.588 14.107 0 9.658-5.369 16.875-13.285 16.875-2.659 0-5.16-1.438-6.016-3.068 0 0-1.43 5.674-1.732 6.768-.522 1.9-1.545 3.797-2.479 5.275 2.215.654 4.554 1.01 6.979 1.01 13.598 0 24.623-11.023 24.623-24.623-.001-13.603-11.027-24.626-24.624-24.626z"/></svg>
             </a>
@@ -297,17 +295,17 @@ Balance: 8842803 <span class="nb">.</span>
 
     <div class="post__navigation">
       
-
-      
-      <a class="next" href="/2019/12/25/HTB-Bank.md/">
-        <div class="next__post-icon">
-          <svg enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m160 128.4 32.3-32.4 159.7 160-159.7 160-32.3-32.4 127.3-127.6z"/></svg>
+      <a class="prev" href="/2019/12/25/HTB-Bank/">
+        <div class="prev__post-icon">
+          <svg enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m352 128.4-32.3-32.4-159.7 160 159.7 160 32.3-32.4-127.3-127.6z"/></svg>
         </div>
         <span class="post__nav-wrapper">
           <div class="post__nav-image" style="background-image: url(/assets/img/bank.png)"></div>
           <h2 class="post__nav-title"><time datetime="2019-12-25T20:55:55+01:00">Dec 25, 2019</time> <br>Hack The Box - Bank</h2>
         </span>
       </a>
+      
+
       
     </div>
 
