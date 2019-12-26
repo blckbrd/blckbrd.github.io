@@ -291,20 +291,21 @@ total 4
 
 <p>Use pythons SimpleHTTPServer and wget to get the LinEnum.sh file to the /var/www/bank dir and run it.</p>
 
-<p>The emergency file stands out from the rest.</p>
+<p>Analysing the report the emergency file stands out from the rest.</p>
 
 <ul>
   <li>-rwsr-xr-x 1 root root 112204 Jun 14  2017 /var/htb/bin/emergency</li>
 </ul>
 
-<p>If we run it i appears that nothing happends.</p>
+<p>If we run it in nc nothing seems to happen, but <strong>id</strong> now shows <strong>euid=0(root) groups=0(root)</strong>.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /var/htb/bin
 <span class="nv">$ </span>./emergency
+
 <span class="nb">id
 </span><span class="nv">uid</span><span class="o">=</span>33<span class="o">(</span>www-data<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>33<span class="o">(</span>www-data<span class="o">)</span> <span class="nv">euid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nb">groups</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span>,33<span class="o">(</span>www-data<span class="o">)</span></code></pre></figure>
 
-<p>So now we can cat the root.txt in the root dir and we’re done.</p>
+<p>So now we can get the root.txt in the root dir and we’re done.</p>
 
     </div>
 
