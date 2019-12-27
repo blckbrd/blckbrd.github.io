@@ -125,6 +125,8 @@
     <div class="post__content" data-aos="fade-up" data-aos-easing="ease-out-quad" data-aos-delay="100" data-aos-duration="700">
       <p>Write-up for retired machine “Bank” on <a href="https://hackthebox.eu" target="_blank">hackthebox.eu</a>. Its a machine running Linux with IP adress: <strong>10.10.10.29</strong>. Lets start by running a NMAP scan and see what ports are open.</p>
 
+<h2 id="enumeration">Enumeration</h2>
+
 <p><a href="https://www.explainshell.com/explain?cmd=nmap+-T4+-A+-p-+-v+10.10.10.29" target="_blank">nmap -T4 -A -p- -v 10.10.10.29</a></p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">Starting Nmap 7.80 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2019-12-25 15:45 EST
@@ -258,6 +260,8 @@ Balance: 8842803 <span class="nb">.</span>
 <span class="o">===</span><span class="nv">UserAccount</span><span class="o">===</span></code></pre></figure>
 
 <p><img src="/assets/img/support.png" alt="support" /></p>
+
+<h2 id="exploitation">Exploitation</h2>
 
 <p>On the support page we can upload a malicious php file. I used the php reverse shell by <a href="http://pentestmonkey.net/tools/web-shells/php-reverse-shell" target="_blank">pentestmonkey</a></p>
 
