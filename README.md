@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Derrick — Minimal Theme for Jekyll.
 
 Derrick is a clean minimal and fast theme for a personal blog.
@@ -115,3 +116,6 @@ Mit License
 ### Support
 
 <p>If you’d like to support me so I can continue to provide free content and themes you can become my sponsor on <a href="https://www.patreon.com/artemsheludko" target="_blank">Patreon</a>. <b>Thank you for your support ❤️</b><p>
+=======
+### Blckbrd Sec — Personal blog
+>>>>>>> f5481578dec10d06e8ba8d37654c59866fb60af5
