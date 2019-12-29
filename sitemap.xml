@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://blckbrdsec.com/2019/12/25/HTB-Bank/</loc>
+<lastmod>2019-12-25T20:55:55+01:00</lastmod>
+</url>
+<url>
+<loc>https://blckbrdsec.com/</loc>
+</url>
+<url>
+<loc>https://blckbrdsec.com/tools/</loc>
+</url>
+<url>
+<loc>https://blckbrdsec.com/tag/hackthebox/</loc>
+</url>
+<url>
+<loc>https://blckbrdsec.com/tag/bank/</loc>
+</url>
+<url>
+<loc>https://blckbrdsec.com/tag/linenum/</loc>
+</url>
+<url>
+<loc>https://blckbrdsec.com/tag/linux/</loc>
+</url>
+<url>
+<loc>https://blckbrdsec.com/tag/reverse-shell/</loc>
+</url>
+</urlset>
