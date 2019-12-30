@@ -175,13 +175,13 @@ E: Package <span class="s1">'zenmap'</span> has no installation candidate</code>
 
 <p>So we need to download the zenmap .rpm on there website <a href="https://nmap.org/download.html" target="_blank">https://nmap.org/download.html</a></p>
 
-<p>Next install “Alien” and convert the .rpm to a .deb file we can install with dpkg.</p>
+<p>Next install “Alien” and convert the .rpm to a .deb file we can install with the dpkg command.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get <span class="nb">install </span>alien</code></pre></figure>
 
 <p>Convert .rpm to .deb</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">root@kali: alien zenmap-7.80-1.noarch.rpm 
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">root@kali:~/Downloads# alien zenmap-7.80-1.noarch.rpm 
 zenmap_7.80-2_all.deb generated</code></pre></figure>
 
 <p>Final step is installing the created zenmap_7.80-2_all.deb file.</p>
@@ -198,6 +198,10 @@ Processing triggers <span class="k">for </span>mime-support <span class="o">(</s
 Processing triggers <span class="k">for </span>man-db <span class="o">(</span>2.9.0-2<span class="o">)</span> ...</code></pre></figure>
 
 <p>Zenmap should now be installed and available in the start menu.</p>
+
+<p><img src="/assets/img/zenmap.png" alt="Zenmap startmenu" /></p>
+
+<p><img src="/assets/img/zenmap2.png" alt="Zenmap running" /></p>
 
     </div>
 
