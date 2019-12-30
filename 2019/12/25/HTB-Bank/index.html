@@ -143,9 +143,11 @@
     </div>
 
     <div class="post__content" data-aos="fade-up" data-aos-easing="ease-out-quad" data-aos-delay="100" data-aos-duration="700">
-      <p>Write-up for retired machine “Bank” on <a href="https://hackthebox.eu" target="_blank">hackthebox.eu</a>. Its a machine running Linux with IP adress: <strong>10.10.10.29</strong>. Lets start by running a NMAP scan and see what ports are open.</p>
+      <p>Write-up for retired machine “Bank” on <a href="https://hackthebox.eu" target="_blank">hackthebox.eu</a>. Its a machine running Linux with IP adress: <strong>10.10.10.29</strong>.</p>
 
-<h2 id="enumeration">Enumeration</h2>
+<p>Lets start by running a NMAP scan and see what ports are open.</p>
+
+<h2 id="informatie-gathering">Informatie gathering</h2>
 
 <p><a href="https://www.explainshell.com/explain?cmd=nmap+-T4+-A+-p-+-v+10.10.10.29" target="_blank">nmap -T4 -A -p- -v 10.10.10.29</a></p>
 
@@ -305,11 +307,15 @@ USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
 /bin/sh: 0: can<span class="s1">'t access tty; job control turned off
 $ </span></code></pre></figure>
 
+<h2 id="user">User</h2>
+
 <p>Since we’re www-data the user.txt can be located in /home/chris.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /home/chris
 total 4
 <span class="nt">-r--r--r--</span> 1 chris chris 33 May 29  2017 user.txt</code></pre></figure>
+
+<h2 id="root">Root</h2>
 
 <p>To get root we use <a href="https://github.com/rebootuser/LinEnum" target="_blank">LinEnum</a></p>
 
